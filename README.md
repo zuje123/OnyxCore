@@ -1,11 +1,11 @@
-<h3 align="left">
+<h2 align="left">
 OnyxCore
-</h3>
+</h2>
 
 <p align="left">
 <a><b>English</b></a> | <a href="README_CN.md"><b>中文</b></a>
 </p>
----
+
 
 ## Introduction
 OnyxCore（ˈɑnɪks kɔr）
