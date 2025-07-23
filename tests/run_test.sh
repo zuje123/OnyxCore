@@ -1,7 +1,7 @@
 #! /bin/bash
 
 nproc_per_node=8
-master_addr=141.61.105.141
+master_addr=127.0.0.1
 export MASTER_ADDR=$master_addr
 port=17621
 export LOGLEVEL=INFO
