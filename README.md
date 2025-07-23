@@ -30,7 +30,7 @@ bash build.sh
 ln -s build/lib.linux-aarch64-cpython-39/deep_ep/deep_ep_cpp.cpython-39-aarch64-linux-gnu.so
 
 # 运行测试用例
-python3 tests/test_buffer.py
+python3 tests/run_test.py
 ```
 说明：
 ```bash
@@ -62,8 +62,19 @@ source /usr/local/Ascend/ascend-toolkit/set_env.sh
 
 ### FAQ
 1、在带算子构建时，初次编译可能会因为某个`.sh`的权限问题报错，添加执行权限即可；
-![build_error](figures/build_error.png)
 添加权限：
 ```bash
 chmod +x csrc/kernels/cmake/util/gen_ops_filter.sh
+```
+
+2、如果安装`.whl`后，在工程中`import deep_ep`出现找不到`deep_ep`库，则检查是否正确安装到当前Python环境的`site-packages`目录下；
+查看安装路径：
+```
+pip show deep-ep
+```
+
+3、如果安装`.whl`后，出现找不到`deep_ep_cpp`，则需要将`site-packages/deep_ep`目录下的`deep_ep_cpp*.so`文件软链接到`site-packages`目录下；
+在`site-packages`目录下执行：
+```
+ln -s deep_ep/deep_ep_cpp*.so
 ```
