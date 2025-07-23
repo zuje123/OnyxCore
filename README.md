@@ -1,71 +1,71 @@
-# OnyxCore
+<h3 align="left">
+OnyxCore
+</h3>
 
+<p align="left">
+<a><b>English</b></a> | <a href="README_CN.md"><b>中文</b></a>
+</p>
+---
+
+## Introduction
 OnyxCore（ˈɑnɪks kɔr）
 Onyx → ​​Overlapping NPU​​（黑曜石的层叠纹理=>计算与通信的时空咬合）
 Core → ​​Kernel Acceleration​​（核心算力引擎）
 
 
-## Quick start
+## Software and hardware
+Supported Hardware Models: Atlas A3 Series Products
+Platform: aarch64/x86
+Supporting Software
+- Driver firmware Ascend HDK 25.0.RC1.1, CANN Community Edition 8.2.RC1.alpha001 and later versions (refer to the "[CANN Software Installation Guide](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/82RC1alpha001/softwareinst/instg/instg_0001.html?Mode=PmIns&OS=Ubuntu&Software=cannToolKit)" to install the CANN development kit package, as well as the supporting firmware and drivers)
+- Before installing CANN software, you need to install the relevant [dependency list](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/82RC1alpha001/softwareinst/instg/instg_0045.html?Mode=PmIns&OS=Ubuntu&Software=cannToolKit)
+- Python >= 3.9
+- PyTorch >= 2.5.1, torch-npu >= 2.5.1-7.0.0
 
-### Requirements
-硬件型号支持：Atlas A3 系列产品
-平台：aarch64/x86
-配套软件
-- 驱动固件 Ascend HDK 25.0.RC1.1、CANN社区版8.2.RC1.alpha001及之后版本（参考《[CANN软件安装指南](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/82RC1alpha001/softwareinst/instg/instg_0001.html?Mode=PmIns&OS=Ubuntu&Software=cannToolKit)》安装CANN开发套件包以及配套固件和驱动）
-- 安装CANN软件前需安装相关[依赖列表](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/82RC1alpha001/softwareinst/instg/instg_0045.html?Mode=PmIns&OS=Ubuntu&Software=cannToolKit)
-- Python 3.9及以上
-- PyTorch 2.1及以上
-- Ascend Extension for Pytorch 2.1.0-7.0.0及以上（torch_npu）
-
-### Development
-1、准备CANN的环境变量（根据安装路径修改）
+## Quick Start
+### Compile and Run
+1. Prepare the CANN environment variables (modify according to the installation path)
 ```bash
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
 ```
 
-2、构建项目
-执行工程构建脚本 build.sh前，根据CANN安装路径，修改`build.sh:line7`的`_ASCEND_INSTALL_PATH`。
+2. Build the project
+Before executing the engineering build script build.sh, modify `_ASCEND_INSTALL_PATH` on line 7 of build.sh according to the CANN installation path.
 ```bash
-# 构建项目
+# Building Project
 bash build.sh
 
-# 根据你的设置软链接到 deep_ep_cpp.*.so 文件
+# Link to the deep_ep_cpp.*.so file based on your settings
 ln -s build/lib.linux-aarch64-cpython-39/deep_ep/deep_ep_cpp.cpython-39-aarch64-linux-gnu.so
 
-# 运行测试用例
+# Run test cases
 bash tests/run_test.sh
 ```
 
 ### Installation
-1、执行安装脚本，将`.whl`安装到你的python环境下
+1. Run the installation script to install the `.whl` file into your Python environment
 ```bash
 bash install.sh
 ```
-安装需要的环境变量：
-- `ASCEND_HOME_PATH`: CANN的安装路径
+Install required environment variables:
+- `ASCEND_HOME_PATH`: CANN installation path
 
-2、执行CANN的环境变量（根据安装路径修改）
+2. Execute the environment variables for CANN (modify according to the installation path)
 ```bash
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
 ```
-3、在python工程中导入`deep_ep`
+3. In the Python project, import `deep_ep`.
 
 
 ### FAQ
-1、在带算子构建时，初次编译可能会因为某个`.sh`的权限问题报错，添加执行权限即可；
-添加权限：
-```bash
-chmod +x csrc/kernels/cmake/util/gen_ops_filter.sh
-```
-
-2、如果安装`.whl`后，在工程中`import deep_ep`出现找不到`deep_ep`库，则检查是否正确安装到当前Python环境的`site-packages`目录下；
-查看安装路径：
+1. If installing the `.whl` file results in the inability to import `deep_ep` in the project, check whether it is correctly installed in the `site-packages` directory of the current Python environment;
+View installation path:
 ```
 pip show deep-ep
 ```
 
-3、如果安装`.whl`后，出现找不到`deep_ep_cpp`，则需要将`site-packages/deep_ep`目录下的`deep_ep_cpp*.so`文件软链接到`site-packages`目录下；
-在`site-packages`目录下执行：
+2. If after installing the `.whl`, you encounter an issue where `deep_ep_cpp` is not found, you need to create a symbolic link of the `deep_ep_cpp*.so` files from the `site-packages/deep_ep` directory to the `site-packages` directory;
+Execute the following command in the `site-packages` directory:
 ```
 ln -s deep_ep/deep_ep_cpp*.so
 ```
